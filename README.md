@@ -1,6 +1,6 @@
 # FOFO_Dev
 https://arongranberg.com/astar/download
-https://assetstore.unity.com/packages/3d/animations/melee-warrior-animations-free-165785#description
+https://assetstore.unity.com/packages/3d/animations/basic-motions-free-154271#publisher
 https://github.com/iuricode/README-template/blob/main/README-repository/iuricode.md
 
 <!---Esses são exemplos. Veja https://shields.io para outras pessoas ou para personalizar este conjunto de escudos. Você pode querer incluir dependências, status do projeto e informações de licença aqui--->
