@@ -15,7 +15,9 @@ Se seu sistema operacional estiver entre Windows, Mac ou Linux, você pode execu
 Foram usados dois patterns padrões no projeto. O primeiro deles é o MVC, consiste em dividir as funcionalidades em 3 subtipos de classe:
   
   ● Data: Go to application > model > ...
+  
   ● Logic/Workflow: Go to application > controller > ...
+  
   ● Rendering/Interface/Detection: Go to application > view > ..
 
 O segundo pattern usado foi o "Object Pooling". Esse pattern consiste em não destruir objetos, mas sim, reutilizá-los no deccorer do game. Foi aplicado na moeda, evitando desperdícios de memória em destruição e criação de novos objetos.
