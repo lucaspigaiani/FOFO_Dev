@@ -7,19 +7,25 @@ public class PlayerCharacter_Controller : BaseCharacter
     [SerializeField] private Camera mainCamera;
     [SerializeField] private GameObject mainCursor;
     private RaycastHit hit;
-    private Ray ray;
 
     private bool canMoveCursor = true;
-    private bool reachedInvoke = true;
-
-    void Start()
-    {
-        
-    }
 
     void Update()
     {
+        CursorManager();
+        ReachedDestination();
 
+        if (Input.GetMouseButtonDown(0) && canMoveCursor == true)
+        {
+            canMoveCursor = false;
+            reachedInvoke = true;
+
+            Move(mainCursor.transform);
+        }
+    }
+
+    private void CursorManager()
+    {
         if (canMoveCursor)
         {
             var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -39,23 +45,6 @@ public class PlayerCharacter_Controller : BaseCharacter
                 }
             }
         }
-
-        if (aiPathCharacter.reachedDestination && reachedInvoke == true)
-        {
-            reachedInvoke = false;
-         //   Debug.Log("chegou");
-            Invoke(nameof(Idle), 0.5f);
-        }
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            canMoveCursor = false;
-            Move(mainCursor.transform);
-        }
-        if (Input.GetMouseButtonUp(0))
-        {
-        }
-
     }
 
     protected override void Idle()
@@ -63,22 +52,13 @@ public class PlayerCharacter_Controller : BaseCharacter
         base.Idle();
         
         canMoveCursor = true;
-        reachedInvoke = true;
     }
-
-  
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag.Equals("Coin"))
-        {
-            CoinCollect();
-        }
         if (other.tag.Equals("Cursor"))
         {
-            Debug.Log("cursor");
             character.target = null;
-            aiPathCharacter.
         }
     }
 }

@@ -10,11 +10,12 @@ public class BaseCharacter : MonoBehaviour
 
     [SerializeField] protected AIDestinationSetter character;
     [SerializeField] protected AIPath aiPathCharacter;
-    [SerializeField] protected float moveSpeed;
     [SerializeField] protected Animator characterController;
 
     protected GraphNode currentNode;
     protected GraphNode targetNode;
+
+    [SerializeField] protected bool reachedInvoke = true;
 
     private void Start()
     {
@@ -30,29 +31,22 @@ public class BaseCharacter : MonoBehaviour
     {
         character.target = targetTransform;
         currentState = States.Walk;
-        characterController.SetTrigger("Walk");
+        characterController.SetBool("ChangeAction", true);
     }
 
     protected virtual void Idle() 
     {
         character.target = null;
         currentState = States.Idle;
-        characterController.SetTrigger("Idle");
+        characterController.SetBool("ChangeAction", false);
     }
 
-    protected virtual void CoinCollect() 
+    protected virtual void ReachedDestination()
     {
-        Debug.Log("chamar evento do coin controller");
-    }
-
-    /* 
-        bool rotate = true;
-
-        if (rotate == true)
+        if (aiPathCharacter.reachedDestination && reachedInvoke == true)
         {
-            Quaternion rotTarget = Quaternion.LookRotation(target.transform.position - transform.position);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, rotTarget, lookAtSpeed * Time.deltaTime);
-            transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
-            Invoke(nameof(ResetRotation), 0.5f); //TODO: Otimizar linha de código
-        }*/
+            reachedInvoke = false;
+            Idle();
+        }
+    }
 }
