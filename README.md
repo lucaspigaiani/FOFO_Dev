@@ -1,10 +1,11 @@
 # FOFO_Dev
 <img src="game.png" alt="game">
 
-> Linha adicional de texto informativo sobre o que o projeto faz. Sua introdução deve ter cerca de 2 ou 3 linhas. Não exagere, as pessoas não vão ler.
+> Corra contra o tempo e contra o bot colete moedas mais rápido que o iimigo, pontue e quebre seus recordes!
 
 ### Assets usados
 Grid e pathfinding - https://arongranberg.com/astar/download
+
 3d Model e animações - https://assetstore.unity.com/packages/3d/animations/basic-motions-free-154271#publisher
 
 ## Pré-requisitos
