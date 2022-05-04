@@ -38,9 +38,10 @@ public class Cursor : MonoBehaviour
 
 	[SerializeField] Transform temp;
 
-	public TurnManager turnManager;
+	/*public TurnManager turnManager;
 	public CameraZoomAndRotation cameraZoomAndRotation;
 	public GridCombatSystem gridCombatSystem;
+	*/
 
 	private bool canSetRotation = true;
 	public bool cursorIsOnScreen = true;
@@ -129,7 +130,7 @@ public class Cursor : MonoBehaviour
 
 				int x = (int)Input.GetAxis("Horizontal");
 				int z = (int)Input.GetAxis("Vertical");
-                switch (cameraZoomAndRotation.currentDirection)
+               /* switch (cameraZoomAndRotation.currentDirection)
                 {
                     case CameraZoomAndRotation.CameraRotation.North:
                         break;
@@ -155,7 +156,7 @@ public class Cursor : MonoBehaviour
                     default:
                         break;
                 }
-
+			   */
 				if (x == 1 || x == -1 || z == 1 || z == -1)
 				{
 					if (node.Walkable && inputDelay == true)
@@ -166,7 +167,7 @@ public class Cursor : MonoBehaviour
                         {
 							characterSetRotation = false;
 						}
-						if (gridCombatSystem.rangedAttackStarted == true)
+					/*	if (gridCombatSystem.rangedAttackStarted == true)
 						{
 							int cost = (node.position - AstarPath.active.GetNearest(gridCombatSystem.currentPlayer.transform.position).node.position).costMagnitude;
 							cost = cost / 1000;
@@ -175,10 +176,10 @@ public class Cursor : MonoBehaviour
 								gridCombatSystem.movedCursor = true;
 							}
 						}
-
-						int currentAP = player[currentPlayer].GetComponent<CharController>().currentAP;
+					*/
+					//	int currentAP = player[currentPlayer].GetComponent<CharController>().currentAP;
 						int movimentCost = GetMovimentCost();
-						UpdateAPCostText(movimentCost, currentAP);
+					//	UpdateAPCostText(movimentCost, currentAP);
 					}
 				}
 
@@ -197,7 +198,7 @@ public class Cursor : MonoBehaviour
 				{
                     if (characterSetRotation == false)
                     {
-						SetTowardsRotation(player[0].GetComponent<CharController>(), mainCursor);
+						//SetTowardsRotation(player[0].GetComponent<CharController>(), mainCursor);
 						
                     }
                     if (characterSetRotation == true)
@@ -264,10 +265,10 @@ public class Cursor : MonoBehaviour
 			//Debug.Log("realocar isso");
 		}
 
-        if (player[0].name != turnManager.currentTarget.name)
+     /*   if (player[0].name != turnManager.currentTarget.name)
         {
 			player[0] = turnManager.currentTarget.GetComponent<AIDestinationSetter>();
-		}
+		}*/
 
 	}
 
@@ -314,7 +315,7 @@ public class Cursor : MonoBehaviour
 	{
 		int cost = (node.position - AstarPath.active.GetNearest(player[currentPlayer].transform.position).node.position).costMagnitude;
 		cost = cost / 1000;
-		bool haveApToWalk = gridCombatSystem.CombatMoviment(cost);
+		bool haveApToWalk = false;// gridCombatSystem.CombatMoviment(cost);
 		return haveApToWalk;
 	}
 
@@ -403,12 +404,12 @@ public class Cursor : MonoBehaviour
 		}
 	}
 
-	public void SetTowardsRotation(CharController attacker, GameObject target)
+	public void SetTowardsRotation(GameObject attacker, GameObject target)
 	{
         if (canSetRotation == true)
         {
-			attacker.target = target;
-			attacker.rotate = true;
+			//attacker.target = target;
+			//attacker.rotate = true;
 			
 			Invoke(nameof(ResetRotation), 0.1f);
 			canSetRotation = false;
