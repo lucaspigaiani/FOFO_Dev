@@ -1,7 +1,7 @@
 # FOFO_Dev
 <img src="game.png" alt="game">
 
-> Corra contra o tempo e contra o bot colete moedas mais rápido que o iimigo, pontue e quebre seus recordes!
+> Corra contra o tempo e contra o bot, colete moedas mais rápido que o inimigo, pontue e quebre seus recordes!
 
 ### Assets usados
 Grid e pathfinding - https://arongranberg.com/astar/download
