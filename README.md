@@ -25,7 +25,7 @@ O segundo pattern usado foi o "Object Pooling". Esse pattern consiste em não de
 ## Gameplay settings
 A cena principal do jogo é a cena "Main", ela está dividida em alguns componentes lógicos. irei fazer uma lista e especificar cada um e quais informações carregam:
 
-● MVC
+● MVC >
 
 ● Model: 
 
@@ -39,11 +39,11 @@ Em view, outros dois objetos, um deles com as informações de interface do scor
 
 Em controller, também são dois objetos. O primeiro segue o padrão de informações sobre o score, porém ele tem as referências de model e view, além de dois             eventos públicos que são usados para adicionar pontos e atualizar o placar de highscore ao fim do jogo. O segundo objeto é o game controller, ele tem as               referências de game view e model, além de ter uma referência de score controller, o game controller é o controlador principal da partida, verifica tempo e             encerra o jogo quando necessário.
 
-● System
+● System:
 
 O primeiro objeto filho de system é o mais importante e necessário a ser citado, ele é o nosso GRID, alterando variaveis nele podemos aumentar ou diminuir o            tamanho de nossa área jogavel. Os outros objetos são alguns padrões de cena como event system, Directional Light, main camera e cinemachine third person camera.
 
-● Environment
+● Environment:
    
   Temos 3 objetos em environment, o primeiro deles é a coin Parent, objeto pai da nossa moeda. Ele é um objeto vazio com finalidade de manter a moeda sempre em uma      posição padrão dentro dos nodes. Dentro dele temos a nossa moeda, ela tem um script de controller que carrega algumas informações como uma referência de                scoreController, limites de spawn position e uma referência do parent para reposicionarmos. 
   
@@ -51,11 +51,11 @@ O primeiro objeto filho de system é o mais importante e necessário a ser citad
   
   O terceiro objeto é o nosso ground, um cubo com a escala aumentada que serve de colisor para ativar os nodes walkables, funcionalidade do plugin de grid e            pathfinding citado lá no começo. 
       
-● UI
+● UI:
     
 UI carrega um objeto filho que é o nosso canvas, dentro do canvas temos um objeto que se chama endgame panel, dentro dele tem dois textos que são usados em             highscore. Os outros objetos filhos do canvas são current score text e timer text.
     
-● Characters
+● Characters:
       
 Dentro de characters temos dois objetos principais, o player e o inimigo. Cada um deles tem um script characterController próprio, com préfixo referente ao tipo      do objeto. Ambos herdam de character controller, que tem algumas variáveis de referência como ai destination setter, ai path, animator controller e algumas            váriaveis exclusivas como referência da camera, do cursor, tempo de delay da busca e referência de coin para a busca.
       
