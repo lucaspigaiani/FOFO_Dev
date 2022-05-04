@@ -1,62 +1,30 @@
 # FOFO_Dev
-https://arongranberg.com/astar/download
-https://assetstore.unity.com/packages/3d/animations/basic-motions-free-154271#publisher
-https://github.com/iuricode/README-template/blob/main/README-repository/iuricode.md
-
 <img src="game.png" alt="game">
 
 > Linha adicional de texto informativo sobre o que o projeto faz. Sua introdução deve ter cerca de 2 ou 3 linhas. Não exagere, as pessoas não vão ler.
 
-### Ajustes e melhorias
+### Assets usados
+Grid e pathfinding - https://arongranberg.com/astar/download
+3d Model e animações - https://assetstore.unity.com/packages/3d/animations/basic-motions-free-154271#publisher
 
-O projeto ainda está em desenvolvimento e as próximas atualizações serão voltadas nas seguintes tarefas:
+## Pré-requisitos
+Se seu sistema operacional estiver entre Windows, Mac ou Linux, você pode executar o arquivo FOFO_Dev.exe dentro da pasta build.
 
-- [x] Tarefa 1
-- [x] Tarefa 2
-- [x] Tarefa 3
-- [ ] Tarefa 4
-- [ ] Tarefa 5
+## Metodologia
+Foram usados dois patterns padrões no projeto. O primeiro deles é o MVC, consiste em dividir as funcionalidades em 3 subtipos de classe:
+  
+  ● Data: Go to application > model > ...
+  ● Logic/Workflow: Go to application > controller > ...
+  ● Rendering/Interface/Detection: Go to application > view > ..
 
-## 💻 Pré-requisitos
+O segundo pattern usado foi o "Object Pooling". Esse pattern consiste em não destruir objetos, mas sim, reutilizá-los no deccorer do game. Foi aplicado na moeda, evitando desperdícios de memória em destruição e criação de novos objetos.
 
-Antes de começar, verifique se você atendeu aos seguintes requisitos:
-<!---Estes são apenas requisitos de exemplo. Adicionar, duplicar ou remover conforme necessário--->
-* Você instalou a versão mais recente de `<linguagem / dependência / requeridos>`
-* Você tem uma máquina `<Windows / Linux / Mac>`. Indique qual sistema operacional é compatível / não compatível.
-* Você leu `<guia / link / documentação_relacionada_ao_projeto>`.
-
-## 🚀 Instalando <nome_do_projeto>
-
-Para instalar o <nome_do_projeto>, siga estas etapas:
-
-Linux e macOS:
-```
-<comando_de_instalação>
-```
-
-Windows:
-```
-<comando_de_instalação>
-```
-
-## ☕ Usando <nome_do_projeto>
-
-Para usar <nome_do_projeto>, siga estas etapas:
-
-```
-<exemplo_de_uso>
-```
-
-Adicione comandos de execução e exemplos que você acha que os usuários acharão úteis. Fornece uma referência de opções para pontos de bônus!
-
-## 📫 Contribuindo para <nome_do_projeto>
-<!---Se o seu README for longo ou se você tiver algum processo ou etapas específicas que deseja que os contribuidores sigam, considere a criação de um arquivo CONTRIBUTING.md separado--->
-Para contribuir com <nome_do_projeto>, siga estas etapas:
-
-1. Bifurque este repositório.
-2. Crie um branch: `git checkout -b <nome_branch>`.
-3. Faça suas alterações e confirme-as: `git commit -m '<mensagem_commit>'`
-4. Envie para o branch original: `git push origin <nome_do_projeto> / <local>`
-5. Crie a solicitação de pull.
-
-Como alternativa, consulte a documentação do GitHub em [como criar uma solicitação pull](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request).
+## Gameplay settings
+A cena está dividida em alguns componentes lógicos. irei fazer uma lista e especificar cada um e quais informações carregam:
+  ● MVC
+   ● Model: 
+      Em model temos dois objetos, um deles carrega dados de score como current score e high score. O segundo objeto carrega dados do game, como o tempo de partida.         Alterando esse tempo, você mudaria o tempo que o jogo ocorre. No padrão, começamos em 60 segundos.
+   ● View:
+      Em view, outros dois objetos, um deles com as informações de interface do score/highscore e o segundo com as informações de timer, que servem para mostrar o           tempo de partida restante.
+   ● Controller:
+      Em controller, também são dois objetos. O primeiro segue o padrão de informações sobre o score, porém ele tem as referências de model e view, além de dois             eventos públicos que são usados para adicionar pontos e atualizar o placar de highscore ao fim do jogo. O segundo objeto é o game controller, ele tem as               referências de game view e model, além de ter uma referência de score controller, o game controller é o controlador principal da partida, verifica tempo e             encerra o jogo quando necessário.
