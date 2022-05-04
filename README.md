@@ -1,70 +1,62 @@
 # FOFO_Dev
-https://arongranberg.com/astar/download
-https://assetstore.unity.com/packages/3d/animations/basic-motions-free-154271#publisher
-https://github.com/iuricode/README-template/blob/main/README-repository/iuricode.md
+<img src="game.png" alt="game">
 
-<!---Esses são exemplos. Veja https://shields.io para outras pessoas ou para personalizar este conjunto de escudos. Você pode querer incluir dependências, status do projeto e informações de licença aqui--->
+> Corra contra o tempo e contra o bot, colete moedas mais rápido que o inimigo, pontue e quebre seus recordes!
 
-![GitHub repo size](https://img.shields.io/github/repo-size/iuricode/README-template?style=for-the-badge)
-![GitHub language count](https://img.shields.io/github/languages/count/iuricode/README-template?style=for-the-badge)
-![GitHub forks](https://img.shields.io/github/forks/iuricode/README-template?style=for-the-badge)
-![Bitbucket open issues](https://img.shields.io/bitbucket/issues/iuricode/README-template?style=for-the-badge)
-![Bitbucket open pull requests](https://img.shields.io/bitbucket/pr-raw/iuricode/README-template?style=for-the-badge)
+### Assets usados
+Grid e pathfinding - https://arongranberg.com/astar/download
 
-<img src="exemplo-image.png" alt="exemplo imagem">
+3d Model e animações - https://assetstore.unity.com/packages/3d/animations/basic-motions-free-154271#publisher
 
-> Linha adicional de texto informativo sobre o que o projeto faz. Sua introdução deve ter cerca de 2 ou 3 linhas. Não exagere, as pessoas não vão ler.
+## Pré-requisitos
+Se seu sistema operacional estiver entre Windows, Mac ou Linux, você pode executar o arquivo FOFO_Dev.exe dentro da pasta build.
 
-### Ajustes e melhorias
+## Metodologia
+Foram usados dois patterns padrões no projeto. O primeiro deles é o MVC, consiste em dividir as funcionalidades em 3 subtipos de classe:
+  
+  ● Data: Go to application > model > ...
+  
+  ● Logic/Workflow: Go to application > controller > ...
+  
+  ● Rendering/Interface/Detection: Go to application > view > ..
 
-O projeto ainda está em desenvolvimento e as próximas atualizações serão voltadas nas seguintes tarefas:
+O segundo pattern usado foi o "Object Pooling". Esse pattern consiste em não destruir objetos, mas sim, reutilizá-los no decorrer do game. Foi aplicado na moeda, evitando desperdícios de memória em destruição e criação de novos objetos.
 
-- [x] Tarefa 1
-- [x] Tarefa 2
-- [x] Tarefa 3
-- [ ] Tarefa 4
-- [ ] Tarefa 5
+## Gameplay settings
+A cena principal do jogo é a cena "Main", ela está dividida em alguns componentes lógicos. irei fazer uma lista e especificar cada um e quais informações carregam:
 
-## 💻 Pré-requisitos
+● MVC >
 
-Antes de começar, verifique se você atendeu aos seguintes requisitos:
-<!---Estes são apenas requisitos de exemplo. Adicionar, duplicar ou remover conforme necessário--->
-* Você instalou a versão mais recente de `<linguagem / dependência / requeridos>`
-* Você tem uma máquina `<Windows / Linux / Mac>`. Indique qual sistema operacional é compatível / não compatível.
-* Você leu `<guia / link / documentação_relacionada_ao_projeto>`.
+● Model: 
 
-## 🚀 Instalando <nome_do_projeto>
+Em model temos dois objetos, um deles carrega dados de score como current score e high score. O segundo objeto carrega dados do game, como o tempo de partida.         Alterando esse tempo, você mudaria o tempo que o jogo ocorre. No padrão, começamos em 60 segundos.
 
-Para instalar o <nome_do_projeto>, siga estas etapas:
+● View:
 
-Linux e macOS:
-```
-<comando_de_instalação>
-```
+Em view, outros dois objetos, um deles com as informações de interface do score/highscore e o segundo com as informações de timer, que servem para mostrar o           tempo de partida restante.
 
-Windows:
-```
-<comando_de_instalação>
-```
+● Controller:
 
-## ☕ Usando <nome_do_projeto>
+Em controller, também são dois objetos. O primeiro segue o padrão de informações sobre o score, porém ele tem as referências de model e view, além de dois             eventos públicos que são usados para adicionar pontos e atualizar o placar de highscore ao fim do jogo. O segundo objeto é o game controller, ele tem as               referências de game view e model, além de ter uma referência de score controller, o game controller é o controlador principal da partida, verifica tempo e             encerra o jogo quando necessário.
 
-Para usar <nome_do_projeto>, siga estas etapas:
+● System:
 
-```
-<exemplo_de_uso>
-```
+O primeiro objeto filho de system é o mais importante e necessário a ser citado, ele é o nosso GRID, alterando variaveis nele podemos aumentar ou diminuir o            tamanho de nossa área jogavel. Os outros objetos são alguns padrões de cena como event system, Directional Light, main camera e cinemachine third person camera.
 
-Adicione comandos de execução e exemplos que você acha que os usuários acharão úteis. Fornece uma referência de opções para pontos de bônus!
-
-## 📫 Contribuindo para <nome_do_projeto>
-<!---Se o seu README for longo ou se você tiver algum processo ou etapas específicas que deseja que os contribuidores sigam, considere a criação de um arquivo CONTRIBUTING.md separado--->
-Para contribuir com <nome_do_projeto>, siga estas etapas:
-
-1. Bifurque este repositório.
-2. Crie um branch: `git checkout -b <nome_branch>`.
-3. Faça suas alterações e confirme-as: `git commit -m '<mensagem_commit>'`
-4. Envie para o branch original: `git push origin <nome_do_projeto> / <local>`
-5. Crie a solicitação de pull.
-
-Como alternativa, consulte a documentação do GitHub em [como criar uma solicitação pull](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request).
+● Environment:
+   
+  Temos 3 objetos em environment, o primeiro deles é a coin Parent, objeto pai da nossa moeda. Ele é um objeto vazio com finalidade de manter a moeda sempre em uma      posição padrão dentro dos nodes. Dentro dele temos a nossa moeda, ela tem um script de controller que carrega algumas informações como uma referência de                scoreController, limites de spawn position e uma referência do parent para reposicionarmos. 
+  
+  O segundo objeto é o cursor usado pelo player no jogo, ele é um cubo vazio, com um colisor e uma tag especifica de cursor. Tem a serventia de mostrar a                localização target e usar o colisor como trigger para avisar que o player chegou ao local desejado. 
+  
+  O terceiro objeto é o nosso ground, um cubo com a escala aumentada que serve de colisor para ativar os nodes walkables, funcionalidade do plugin de grid e            pathfinding citado lá no começo. 
+      
+● UI:
+    
+UI carrega um objeto filho que é o nosso canvas, dentro do canvas temos um objeto que se chama endgame panel, dentro dele tem dois textos que são usados em             highscore. Os outros objetos filhos do canvas são current score text e timer text.
+    
+● Characters:
+      
+Dentro de characters temos dois objetos principais, o player e o inimigo. Cada um deles tem um script characterController próprio, com préfixo referente ao tipo      do objeto. Ambos herdam de character controller, que tem algumas variáveis de referência como ai destination setter, ai path, animator controller e algumas            váriaveis exclusivas como referência da camera, do cursor, tempo de delay da busca e referência de coin para a busca.
+      
+Sendo esse o projeto, encerro este documento.
