@@ -20,7 +20,7 @@ Foram usados dois patterns padrões no projeto. O primeiro deles é o MVC, consi
   
   ● Rendering/Interface/Detection: Go to application > view > ..
 
-O segundo pattern usado foi o "Object Pooling". Esse pattern consiste em não destruir objetos, mas sim, reutilizá-los no deccorer do game. Foi aplicado na moeda, evitando desperdícios de memória em destruição e criação de novos objetos.
+O segundo pattern usado foi o "Object Pooling". Esse pattern consiste em não destruir objetos, mas sim, reutilizá-los no decorrer do game. Foi aplicado na moeda, evitando desperdícios de memória em destruição e criação de novos objetos.
 
 ## Gameplay settings
 A cena principal do jogo é a cena "Main", ela está dividida em alguns componentes lógicos. irei fazer uma lista e especificar cada um e quais informações carregam:
@@ -41,20 +41,22 @@ Em controller, também são dois objetos. O primeiro segue o padrão de informa�
 
 ● System
 
-O primeiro objeto filho de system é o mais importante e necessário a ser citado, ele é o nosso GRID, alterando variaveis nele podemos aumentar ou diminuir o            tamanho de nossa area jogavel. Os outros objetos são alguns padrões de cena como event system, Directional Light, main camera e cinemachine third person camera.
+O primeiro objeto filho de system é o mais importante e necessário a ser citado, ele é o nosso GRID, alterando variaveis nele podemos aumentar ou diminuir o            tamanho de nossa área jogavel. Os outros objetos são alguns padrões de cena como event system, Directional Light, main camera e cinemachine third person camera.
 
 ● Environment
    
-  Temos 3 objetos em environment, o primeiro deles é a coin Parent, objeto pai da nossa moeda. Ele é um objeto vazio com finalidade de manter a moeda sempre em uma      posição padrão dentro dos nodes. Dentro dele temos a nossa moeda, ela tem um script de cotroller que carrega algumas informações como uma referência de                scoreController, limites de spawn position e uma referência do parent para reposicionarmos. 
+  Temos 3 objetos em environment, o primeiro deles é a coin Parent, objeto pai da nossa moeda. Ele é um objeto vazio com finalidade de manter a moeda sempre em uma      posição padrão dentro dos nodes. Dentro dele temos a nossa moeda, ela tem um script de controller que carrega algumas informações como uma referência de                scoreController, limites de spawn position e uma referência do parent para reposicionarmos. 
+  
   O segundo objeto é o cursor usado pelo player no jogo, ele é um cubo vazio, com um colisor e uma tag especifica de cursor. Tem a serventia de mostrar a                localização target e usar o colisor como trigger para avisar que o player chegou ao local desejado. 
+  
   O terceiro objeto é o nosso ground, um cubo com a escala aumentada que serve de colisor para ativar os nodes walkables, funcionalidade do plugin de grid e            pathfinding citado lá no começo. 
       
 ● UI
     
-UI carrega um objeto filho que é o nosso canvas, dentro do canvas temos um objeto que se chama endgame panel, dentro dele tem dois textos que são usados em             highscore. Os outros objetos filhos d canvas são current score text e timer text.
+UI carrega um objeto filho que é o nosso canvas, dentro do canvas temos um objeto que se chama endgame panel, dentro dele tem dois textos que são usados em             highscore. Os outros objetos filhos do canvas são current score text e timer text.
     
 ● Characters
       
-Dentro de characters temos dois objetos principais, o player e o inimigo. Cada um deles tem um script characterController proprio, com préfixo referente ao tipo      do objeto. Ambos herdam de character controller, que tem algumas variáveis de referência como ai destination setter, ai path, animator controller e algumas            váriaveis exclusivas como referência da camera, do cursor, tempo de delay da busca e referência de coin para a busca.
+Dentro de characters temos dois objetos principais, o player e o inimigo. Cada um deles tem um script characterController próprio, com préfixo referente ao tipo      do objeto. Ambos herdam de character controller, que tem algumas variáveis de referência como ai destination setter, ai path, animator controller e algumas            váriaveis exclusivas como referência da camera, do cursor, tempo de delay da busca e referência de coin para a busca.
       
 Sendo esse o projeto, encerro este documento.
